@@ -1,3 +1,4 @@
 from django.contrib import admin
+from goods.models import GoodItem
 
-# Register your models here.
+admin.site.register(GoodItem)
