@@ -20,6 +20,7 @@
             <th>Название</th>
             <th>Поставщик</th>
             <th>Цена</th>
+            <th>Категория</th>
 
         </tr>
         {% for object in object_list %}
@@ -27,6 +28,7 @@
                 <td>{{ object.title }}</td>
                 <td>{{ object.vendor }}</td>
                 <td>{{ object.price }}</td>
+                <td>{{ object.category.title }}</td>
             </tr>
         {% endfor %}
     </table>

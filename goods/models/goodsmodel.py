@@ -1,8 +1,22 @@
 from django.db import models
 
 
-class GoodItem(models.Model):
+class Category(models.Model):
 
+    title = models.CharField(
+        verbose_name='Название Категории',
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Картегории'
+
+
+class GoodItem(models.Model):
     created_at = models.DateTimeField(
         verbose_name='Дата добавления',
         auto_created=True,
@@ -24,6 +38,15 @@ class GoodItem(models.Model):
         max_length=255
     )
 
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
+    # category = models.ManyToManyField(Category, null=True)
+
+    def __str__(self):
+        return self.title
+
+
     class Meta:
         verbose_name = 'Карточка товара'
         verbose_name_plural = 'Карточки товаров'
+
+
