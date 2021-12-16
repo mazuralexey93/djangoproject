@@ -8,5 +8,5 @@ class ItemsListView(ListView):
     template_name = "goods_list.html"
 
     def get_queryset(self):
-        items = GoodItem.objects.all()
+        items = GoodItem.objects.select_related('category').prefetch_related('new_category').all()
         return items

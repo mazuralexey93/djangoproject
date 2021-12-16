@@ -38,12 +38,19 @@ class GoodItem(models.Model):
         max_length=255
     )
 
-    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
-    # category = models.ManyToManyField(Category, null=True)
+    category = models.ForeignKey(
+        Category,
+        null=True,
+        on_delete=models.CASCADE
+    )
+
+    new_category = models.ManyToManyField(
+        Category,
+        related_name='new_category'
+    )
 
     def __str__(self):
         return self.title
-
 
     class Meta:
         verbose_name = 'Карточка товара'
