@@ -8,5 +8,6 @@ class ItemsListView(ListView):
     template_name = "goods_list.html"
 
     def get_queryset(self):
-        items = GoodItem.objects.select_related('category').prefetch_related('new_category').all()
-        return items
+        queryset  = GoodItem.objects.select_related('category').prefetch_related('new_category').all()
+        category_id = self.kwargs.get('category_id')
+        return queryset.filter(category_id=category_id) if category_id else queryset

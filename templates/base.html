@@ -19,13 +19,27 @@
 
 {% block content %}
 
+
+{#    <div class="list-group">#}
+{#        {% for category in categories %}#}
+{#            <a href="{% url 'products:product' category.id %}"#}
+{#               class="list-group-item">{{ category.name }}</a>#}
+{#        {% endfor %}#}
+{#    </div>#}
+     <a href="{% url 'goods:index' %}">Главная</a>
+    <div class="category-list">
+        {% for cat in object_list %}
+            <a href="{% url 'goods:category' cat.id %}">{{ cat.category.title }}</a>
+        {% endfor %}
+    </div>
+
     <table>
         <tr>
             <th>Название</th>
             <th>Поставщик</th>
             <th>Цена</th>
             <th>Категория</th>
-            <th>Новые Категория</th>
+            <th>Новые Категории</th>
 
         </tr>
         {% for object in object_list %}
