@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 
 
 class Category(models.Model):
@@ -19,6 +21,9 @@ class GoodItem(models.Model):
     vendor = models.CharField(verbose_name='Поставщик', max_length=255)
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     new_category = models.ManyToManyField(Category, related_name='new_category')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
+    objects = models.Manager()
+    on_site = CurrentSiteManager('site')
 
     def __str__(self):
         return self.title

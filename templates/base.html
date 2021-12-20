@@ -18,15 +18,8 @@
 <body>
 
 {% block content %}
+    <a href="{% url 'goods:index' %}">Главная</a>
 
-
-{#    <div class="list-group">#}
-{#        {% for category in categories %}#}
-{#            <a href="{% url 'products:product' category.id %}"#}
-{#               class="list-group-item">{{ category.name }}</a>#}
-{#        {% endfor %}#}
-{#    </div>#}
-     <a href="{% url 'goods:index' %}">Главная</a>
     <div class="category-list">
         {% for cat in object_list %}
             <a href="{% url 'goods:category' cat.id %}">{{ cat.category.title }}</a>
@@ -40,6 +33,7 @@
             <th>Цена</th>
             <th>Категория</th>
             <th>Новые Категории</th>
+            <th>site</th>
 
         </tr>
         {% for object in object_list %}
@@ -53,6 +47,7 @@
                         {{ obj.title }}
                     {% endfor %}
                 </td>
+                <td>{{ object.site.name }}</td>
             </tr>
         {% endfor %}
     </table>
