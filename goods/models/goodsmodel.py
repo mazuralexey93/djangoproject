@@ -27,8 +27,8 @@ class GoodItem(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     new_category = models.ManyToManyField(Category, related_name='new_category')
     site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
-    objects = CustomManager()
-    # on_site = CurrentSiteManager('site')
+    objects = models.Manager()
+    on_site = CurrentSiteManager('site')
 
     def __str__(self):
         return self.title
