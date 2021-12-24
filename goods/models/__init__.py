@@ -1,1 +1,1 @@
-from .goodsmodel import GoodItem
+from .goodsmodel import GoodItem, Category
