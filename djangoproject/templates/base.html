@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titile</title>
+
+    {% block style %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+    <div>{{ site.name }}</div>
+    <a href="{% url 'goods:index' %}">Главная</a>
+
+    <div class="category-list">
+        {% for cat in object_list %}
+            <a href="{% url 'goods:category' cat.id %}">{{ cat.category.title }}</a>
+        {% endfor %}
+    </div>
+
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Поставщик</th>
+            <th>Цена</th>
+            <th>Категория</th>
+            <th>Новые Категории</th>
+            <th>site</th>
+
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.title }}</td>
+                <td>{{ object.vendor }}</td>
+                <td>{{ object.price }}</td>
+                <td>{{ object.category.title }}</td>
+                <td>
+                    {% for obj in object.new_category.all %}
+                        {{ obj.title }}
+                    {% endfor %}
+                </td>
+                <td>{{ object.site.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
+{% block butt %}
+{% endblock %}
+
+</body>
+</html>
