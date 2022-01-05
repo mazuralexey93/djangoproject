@@ -6,8 +6,23 @@ services:
     privileged: true
     restart: always
     ports:
-      - 5432:5432
+      - 54323:5432
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: test
+
+  backend:
+    build:
+      context: ./djangoproject
+    environment:
+      DJANGO_SETTINGS_MODULE: djangoproject.settings.prod_int
+
+    ports:
+      - 8080:8080
+    command: bash -c "
+      python manage.py migrate
+      && gunicorn djangoproject.wsgi -b 0.0.0.0:8080
+      "
+    depends_on:
+      - db
